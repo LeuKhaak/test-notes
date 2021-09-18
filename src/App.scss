@@ -1,0 +1,55 @@
+$app-bgc: rgba(206, 245, 206, 0.3);
+
+.App {
+  text-align: center;
+}
+
+.container {
+  width: 80%;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding-top: 20px;
+	background-color: $app-bgc;
+	// height: 50px;
+}
+
+.creater {
+	display: flex;
+	flex-direction: column;
+	align-items:flex-start;
+}
+
+// .noteForm {
+// 	width: 80%;	
+// }
+
+.noteForm > textarea {
+	width: 100%;
+	height: 50px;
+	padding: 5px;
+	border-radius: 10px;
+	margin-bottom: 15px
+}
+
+.notesList {
+	padding-left: 0;
+}
+
+.note {
+	display: flex;
+	align-items: center;
+}
+.delete {
+	padding: 0 5px;
+	// width: 15px;
+	height: 25px;
+	margin-right: 10px;
+}
+
+li > p > span {
+	display: inline-block;
+	padding: 0 5px;
+	padding-bottom: 2px;
+	border-radius: 7px;	
+	background-color: rgb(247, 228, 219);
+}
