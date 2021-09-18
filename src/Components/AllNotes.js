@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import Note from './Note';
 
 function AllNotes(props) {
+  console.log(props.data)
 
   return(
       <div className="notes">

@@ -2,14 +2,14 @@ $app-bgc: rgba(206, 245, 206, 0.3);
 
 .App {
   text-align: center;
+  background-color: $app-bgc;
 }
 
 .container {
   width: 80%;
 	max-width: 1280px;
 	margin: 0 auto;
-	padding-top: 20px;
-	background-color: $app-bgc;
+	padding-top: 20px;	
 	// height: 50px;
 }
 
@@ -38,6 +38,9 @@ $app-bgc: rgba(206, 245, 206, 0.3);
 .note {
 	display: flex;
 	align-items: center;
+	border: 1px solid #000;
+	border-radius: 10px;
+	margin-bottom: 5px;
 }
 .delete {
 	padding: 0 5px;

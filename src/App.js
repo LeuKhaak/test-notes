@@ -17,7 +17,7 @@ function App() {
   
     const copyNotes = [ ...Notes ];
     const note = value.replace(/(^|\W)(#[a-z\d][\w-]*)/ig, '$1<span>$2</span>');
-    copyNotes.push(note);
+    copyNotes.push([note, value]);
   
     setNotes(copyNotes);
   
@@ -25,15 +25,18 @@ function App() {
   }
 
   const updateNotesList = () => {
+    if (!localStorage.getItem('notes')) return
     const newData = JSON.parse(localStorage.getItem('notes'));
     setNotes(newData)
   }
 
   return (
     
-    <div className="App container">
-      <CreatorNotes className="creator" add={ addNote }/>
-      <AllNotes className="allNotes" data={ Notes } update={ updateNotesList }/>
+    <div className="App">
+      <div className="container">
+        <CreatorNotes className="creator" add={ addNote }/>
+        <AllNotes className="allNotes" data={ Notes } update={ updateNotesList }/>
+      </div>
     </div>
   );
 }
