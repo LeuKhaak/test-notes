@@ -1,4 +1,4 @@
-$app-bgc: rgba(206, 245, 206, 0.3);
+$app-bgc: rgba(250, 244, 244, 0.3);
 
 .App {
   text-align: center;
@@ -6,53 +6,130 @@ $app-bgc: rgba(206, 245, 206, 0.3);
 }
 
 .container {
-  width: 80%;
+    width: 80%;
 	max-width: 1280px;
 	margin: 0 auto;
-	padding-top: 20px;	
-	// height: 50px;
+	padding: 5px 0;
 }
 
-.creater {
+.creators {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 5px;
+	min-height: 45px;
+}
+
+.creatorNotes {
 	display: flex;
 	flex-direction: column;
 	align-items:flex-start;
+}
+
+.createButton {
+	padding: 5px;
+	background-color: rgb(163, 243, 176);
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.creatorWrapper {
+	align-items: center;
 }
 
 // .noteForm {
 // 	width: 80%;	
 // }
 
-.noteForm > textarea {
-	width: 100%;
-	height: 50px;
-	padding: 5px;
-	border-radius: 10px;
-	margin-bottom: 15px
+.noteForm, .tagInput {	
+	padding: 3px;
+	border-radius: 10px;	
+	margin-right: 10px;
 }
 
-.notesList {
-	padding-left: 0;
+.noteForm {
+	// width: 100%;
+	height: 30px;
+	margin-left: 10px;
+}
+
+.notes {
+	display: flex;
+	padding-top: 10px;
+}
+
+.notesList {	
+	width: 60%;
+	margin-right: 20px;
+}
+
+.noteWrapper {
+	margin-right: 10px;
 }
 
 .note {
 	display: flex;
 	align-items: center;
-	border: 1px solid #000;
+	background-color: $app-bgc;
+	border: 0.5px solid rgb(230, 224, 224);
 	border-radius: 10px;
-	margin-bottom: 5px;
-}
-.delete {
-	padding: 0 5px;
-	// width: 15px;
-	height: 25px;
-	margin-right: 10px;
+	margin-bottom: 10px;
+	padding: 5px;
 }
 
-li > p > span {
+.noteWrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.noteWrapper > p {
+	margin-bottom: 10px;
+}
+
+.delete, .edit {
+	padding: 0 5px;	
+	height: 25px;
+	margin-right: 10px;
+	background-color: rgb(238, 128, 101);
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.edit {
+	background-color: rgb(213, 238, 101);	
+}
+
+.noteText {
+	margin-top: 5px;
+	padding: 5px;
+	background-color: #fff;
+	border: 0.5px solid rgb(230, 224, 224);
+	border-radius: 5px;
+}
+
+.editing > span {
 	display: inline-block;
 	padding: 0 5px;
 	padding-bottom: 2px;
+	margin-left: 5px;
 	border-radius: 7px;	
-	background-color: rgb(247, 228, 219);
+	background-color: rgba(203, 238, 252, 0.4);
+}
+
+.noteTags span {
+	display: inline-block;
+	padding: 0 5px;
+	padding-bottom: 2px;
+	margin-left: 5px;
+	border-radius: 7px;	
+	background-color: rgba(203, 238, 252, 0.4);
+}
+
+.allTags {
+	width: calc(40% - 20px);
+	padding-top: 10px;
+	border-radius: 10px;	
+	background-color: rgba(203, 238, 252, 0.4);
 }

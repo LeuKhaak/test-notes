@@ -24,13 +24,13 @@ const handleChange = (event) => {
 
 
   return(
-      <div className="creater">        
-        <button onClick={startCreate} style={showCreator === 'no' ? {display: 'block'} : {display: 'none'}} className="createNote">Create note</button>
+      <div className="creatorNotes">        
+        <button onClick={startCreate} style={showCreator === 'no' ? {display: 'block'} : {display: 'none'}} className="createButton">Create note</button>
 
-        <div style={showCreator === 'yes' ? {display: 'block'} : {display: 'none'}} className="noteForm">
-          <textarea ref={refCreator} name="noteContent" placeholder="Write your note" value={value} onChange={(event) => handleChange(event)}></textarea>
+        <div className="creatorWrapper"  style={showCreator === 'yes' ? {display: 'flex'} : {display: 'none'}}>
+          <button onClick={addNote} className="createButton">Add note</button>
 
-          <button onClick={addNote} className="addNote">Add note</button>
+          <textarea className="noteForm" ref={refCreator} name="noteContent" placeholder="Write your note" value={value} onChange={(event) => handleChange(event)}></textarea>          
         </div>        
       </div>
   )
