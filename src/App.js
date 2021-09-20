@@ -2,69 +2,48 @@ import { useState, useEffect } from 'react';
 import './App.scss';
 import Creators from './Components/Creators';
 import AllNotes from './Components/AllNotes';
-
+import prepareData from './Utils/PrepareData';
 
 function App() {
   const [notes, setNotes] = useState([]);
-  const [tags, setTags] = useState([]);
-  
+  const [tags, setTags] = useState([]);  
   
   useEffect(() => {
-    setNotes(JSON.parse(localStorage.getItem('notes')) || []);
+    setNotes(JSON.parse(localStorage.getItem('notes')) || []); // loading saved data
     setTags(JSON.parse(localStorage.getItem('tags')) || []);
     
-    if (!localStorage.getItem('notes')) {
+    if (!localStorage.getItem('notes')) { // loading default data
       fetch('/json/data.json')
       .then((res) => res.json())
       .then((data) => {
         setNotes(data.notes)
         setTags(data.tags)
       })
-    }
-
-    // eslint-disable-next-line
+    } // eslint-disable-next-line
   }, []);
 
-  const addTag = (value) => {  
+  const addTag = (value) => {  // adding a new tag
     if(value === '' || value[0] !== '#') return
 
     const copyTags = [ ...tags ];
     copyTags.push(value.toLowerCase())    
-    const uniqueTags = Array.from(new Set(copyTags.map(JSON.stringify))).map(JSON.parse);
+    const uniqueTags = Array.from(new Set(copyTags.map(JSON.stringify))).map(JSON.parse); // duplication check
     
     setTags(uniqueTags)
     localStorage.setItem('tags', JSON.stringify(uniqueTags));
   }
 
-  const checkForSigns = (arg) => {
-    const result = []
-    arg.forEach(element => {
-      const end = element[element.length - 1]
-      if (end === '!' || end === '.' || end === ',' || end === ':') {
-        const elem = element.slice(0, element.length - 1)        
-        result.push(elem)
-      }
-      else result.push(element)
-    });
-    return result;
-  }
-
-  const addNote = (value) => {  
+  const addNote = (value) => {  // adding a new note
     if(value === '') return
   
     const copyNotes = [ ...notes ];
     const copyTags = [ ...tags ];
 
-    const preNote = value.replace(/(^|\W)(#[a-z\d][\w-]*)/ig, '$1<span>$2</span>');
-    const note = preNote.split('#').join('');
-    const newTags = value.toLowerCase().split(' ').filter(element => element.includes("#"))
-    
-    const newTags1 = checkForSigns(newTags)
-    const uniqueNewTags = Array.from(new Set(newTags1.map(JSON.stringify))).map(JSON.parse);
+    const prepData = prepareData(value)
 
-    copyNotes.push([note, value, uniqueNewTags]);
-    copyTags.push(...uniqueNewTags)
-    const uniqueTags = Array.from(new Set(copyTags.map(JSON.stringify))).map(JSON.parse);
+    copyNotes.push([prepData[0], value, prepData[1]]);
+    copyTags.push(...prepData[1])
+    const uniqueTags = Array.from(new Set(copyTags.map(JSON.stringify))).map(JSON.parse); // duplication check
   
     setNotes(copyNotes);
     setTags(uniqueTags)    
@@ -73,7 +52,7 @@ function App() {
     localStorage.setItem('tags', JSON.stringify(uniqueTags));
   }
 
-  const deleteNote = (inx) => {    
+  const deleteNote = (inx) => { // deleting a note   
     const newData = notes.filter((elem, index) => index !== inx);
 
     setNotes([...newData]);
@@ -87,24 +66,18 @@ function App() {
     localStorage.setItem('tags', JSON.stringify(newData));    
   }
 
-  const updateNotesList = (inx, editedNote) => {
+  const updateNotesList = (inx, editedNote) => { // changing a note
       const newData = [...notes]
 
-      const preNote = editedNote.replace(/(^|\W)(#[a-z\d][\w-]*)/ig, '$1<span>$2</span>');
-      const note = preNote.split('#').join('');
-      const newTags = editedNote.toLowerCase().split(' ').filter(element => element.includes("#"))
+      const prepData = prepareData(editedNote)
 
-      const newTags1 = checkForSigns(newTags)
-      const uniqueNewTags = Array.from(new Set(newTags1.map(JSON.stringify))).map(JSON.parse);
-
-      newData[inx][0] = note
+      newData[inx][0] = prepData[0]
       newData[inx][1] = editedNote
-      newData[inx][2] = uniqueNewTags
+      newData[inx][2] = prepData[1]
       
       const allTags = [...tags]
-      allTags.push(...uniqueNewTags)
-      const uniqueTags = Array.from(new Set(allTags.map(JSON.stringify))).map(JSON.parse);
-      
+      allTags.push(...prepData[1])
+      const uniqueTags = Array.from(new Set(allTags.map(JSON.stringify))).map(JSON.parse); // duplication check      
 
       setNotes([...newData]);
       setTags(uniqueTags)
@@ -113,7 +86,7 @@ function App() {
       localStorage.setItem('tags', JSON.stringify(uniqueTags));        
   }
 
-  const filterNotes = (tag) => {
+  const filterNotes = (tag) => { // filtering notes by tag (moving to the top of the list)
     const data = [...notes]
 
     const withTag = data.filter(element => element[2].includes(tag))

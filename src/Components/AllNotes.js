@@ -10,6 +10,7 @@ function AllNotes(props) {
             <Note key={ element } data={element} tags={props.tags} index={ index } update={props.update} deleteNote={ props.deleteNote }/>           
           ))}
         </ul>
+        
         <AllTags tags={props.tags} deleteTag={props.deleteTag} filterNotes={props.filterNotes}/>
       </section>
   )

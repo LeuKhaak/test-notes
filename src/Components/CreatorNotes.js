@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import checkForTags from '../Utils/CheckForTags';
 
 function CreatorNotes(props) {    
 
@@ -7,43 +8,19 @@ const refCreator = React.useRef()
 const [showCreator, setShowCreator] = useState('no')
 const [value, setValue] = useState('')
 
-const startCreate = () => {
+const startCreate = () => { // opening the note creation editor
   setShowCreator('yes')
   setValue('')
 }
 
-const checkForTags = () => {
-  if (value === '') return ''
-  const words = refCreator.current.value.split(' ')
-  //const tags = props.tags.toString()
-
-  const checkedWords = []
-  words.forEach(element => {
-
-    let Tag = element;
-    
-    props.tags.forEach((tag) => {
-      if (tag.slice(1).toLowerCase() === element.toLowerCase() && element[0] !== '#') 
-        Tag = '#' + element   
-    })
-
-    checkedWords.push(Tag)
-    
-    
-  });
-  const checkedNote = checkedWords.join(' ')
-  return checkedNote;
-}
-
-const addNote = () => {
+const addNote = () => { // adding a created note
   setShowCreator('no')
-  props.add(checkForTags());
+  props.add(checkForTags(value, refCreator, props)); // checkForTags - checking words for matching tags
 }
 
-const handleChange = (event) => { 
+const handleChange = (event) => { // function to change the value when entering characters
   setValue(event.target.value)
 }
-
 
   return(
       <div className="creatorNotes">        

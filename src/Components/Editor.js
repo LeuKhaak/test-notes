@@ -1,47 +1,26 @@
 import React, {useState} from 'react';
+import checkForTags from '../Utils/CheckForTags';
 
 function Editor(props) {
     const refEditor = React.useRef()
     
-    const [value, setValue] = useState(props.data)
+    const [value, setValue] = useState(props.data) 
 
-    const checkForTags = () => {
-      if (value === '') return ''
-      const words = refEditor.current.value.split(' ')
-      //const tags = props.tags.toString()
-    
-      const checkedWords = []
-      words.forEach(element => {
-
-        let Tag = element;
-        
-        props.tags.forEach((tag) => {
-          if (tag.slice(1).toLowerCase() === element.toLowerCase() && element[0] !== '#') 
-            Tag = '#' + element   
-        })
-
-        checkedWords.push(Tag)
-        
-        
-      });
-      const checkedNote = checkedWords.join(' ')
-      return checkedNote;
-    }
-
-    const changeNote = () => {
+    const changeNote = () => { // closing the editing window (opening - with the help of props) and saving the edited note
         props.setShowEditor('no')
-        props.update(props.index, checkForTags())        
+        props.update(props.index, checkForTags(value, refEditor, props)) // checking words for matching tags       
     }
 
-    const handleChange = (event) => { 
+    const handleChange = (event) => { // function to change the value when entering characters
       setValue(event.target.value)
     }
 
   return( 
     <div className="editor" style={props.showEditor === 'yes' ? {display: 'flex'} : {display: 'none'}}>
-        <textarea className="noteForm" ref={refEditor} name="noteContent" value={value} onChange={(event) => handleChange(event)}></textarea>
 
-        <button onClick={changeNote}  className="createButton change">Change note</button>
+      <textarea className="noteForm" ref={refEditor} name="noteContent" value={value} onChange={(event) => handleChange(event)}></textarea>
+
+      <button onClick={changeNote}  className="createButton change">Change note</button>
     </div>
   )
 } 

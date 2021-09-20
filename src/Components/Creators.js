@@ -6,6 +6,7 @@ function Creators(props) {
   return(
       <section className="creators" >
         <CreatorNotes tags={props.tags} add={ props.add }/>
+        
         <CreatorTags addTag={ props.addTag } tags={props.tags}/>
       </section>
   )
