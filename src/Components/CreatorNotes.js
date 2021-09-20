@@ -1,5 +1,4 @@
-// eslint-disable-next-line
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 function CreatorNotes(props) {    
 
@@ -13,9 +12,32 @@ const startCreate = () => {
   setValue('')
 }
 
+const checkForTags = () => {
+  if (value === '') return ''
+  const words = refCreator.current.value.split(' ')
+  //const tags = props.tags.toString()
+
+  const checkedWords = []
+  words.forEach(element => {
+
+    let Tag = element;
+    
+    props.tags.forEach((tag) => {
+      if (tag.slice(1).toLowerCase() === element.toLowerCase() && element[0] !== '#') 
+        Tag = '#' + element   
+    })
+
+    checkedWords.push(Tag)
+    
+    
+  });
+  const checkedNote = checkedWords.join(' ')
+  return checkedNote;
+}
+
 const addNote = () => {
   setShowCreator('no')
-  props.add(refCreator.current.value);
+  props.add(checkForTags());
 }
 
 const handleChange = (event) => { 

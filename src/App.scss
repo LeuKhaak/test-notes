@@ -72,7 +72,7 @@ $app-bgc: rgba(250, 244, 244, 0.3);
 	display: flex;
 	align-items: center;
 	background-color: $app-bgc;
-	border: 0.5px solid rgb(230, 224, 224);
+	border: 1px solid rgb(209, 206, 206);
 	border-radius: 10px;
 	margin-bottom: 10px;
 	padding: 5px;
@@ -105,8 +105,8 @@ $app-bgc: rgba(250, 244, 244, 0.3);
 	margin-top: 5px;
 	padding: 5px;
 	background-color: #fff;
-	border: 0.5px solid rgb(230, 224, 224);
-	border-radius: 5px;
+	border: 1px solid rgb(209, 206, 206);
+	border-radius: 10px;
 }
 
 .editing > span {
@@ -118,18 +118,23 @@ $app-bgc: rgba(250, 244, 244, 0.3);
 	background-color: rgba(203, 238, 252, 0.4);
 }
 
-.noteTags span {
-	display: inline-block;
-	padding: 0 5px;
-	padding-bottom: 2px;
-	margin-left: 5px;
-	border-radius: 7px;	
-	background-color: rgba(203, 238, 252, 0.4);
+.noteTags {
+	font-weight: bold;
+	font-size: 14px;
+	color: rgb(2, 71, 117);
 }
 
 .allTags {
 	width: calc(40% - 20px);
-	padding-top: 10px;
+	padding: 10px;
 	border-radius: 10px;	
 	background-color: rgba(203, 238, 252, 0.4);
+}
+
+.tagItem {
+	display: flex;
+	margin-bottom: 10px;
+	padding: 5px;
+	border: 1px solid rgb(209, 206, 206);
+	border-radius: 10px;
 }

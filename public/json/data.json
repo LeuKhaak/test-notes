@@ -1,0 +1,60 @@
+{
+    "notes": [
+        [
+            "To water <span>flowers</span>",
+            "To water #flowers",
+            [
+                "#flowers"
+            ]
+        ],
+        [
+            "I wanna go to <span>shop</span> and <span>libriary</span>",
+            "I wanna go to #shop and #libriary",
+            [
+                "#shop",
+                "#libriary"
+            ]
+        ],
+        [
+            "<span>Grandma</span> arrives <span>wednesday</span>",
+            "#Grandma arrives #wednesday",
+            [
+                "#grandma",
+                "#wednesday"
+            ]
+        ],
+        [
+            "Meeting with <span>friends</span> in <span>cafe</span>",
+            "Meeting with #friends in #cafe",
+            [
+                "#friends",
+                "#cafe"
+            ]
+        ],
+        [
+            "Reply to <span>email</span>",
+            "Reply to #email",
+            [
+                "#email"
+            ]
+        ],
+        [
+            "\nPick up the <span>car</span> from the service",
+            "\nPick up the #car from the service",
+            [
+                "#car"
+            ]
+        ]
+    ],
+    "tags": [
+        "#shop",
+        "#libriary",
+        "#grandma",
+        "#wednesday",
+        "#friends",
+        "#cafe",
+        "#flowers",
+        "#email",
+        "#car"
+    ]
+}

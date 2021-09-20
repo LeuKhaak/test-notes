@@ -1,5 +1,4 @@
-// eslint-disable-next-line
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 function CreatorTags(props) { 
   // eslint-disable-next-line
@@ -14,7 +13,7 @@ const [value, setValue] = useState('')
 
   const addTag = () => {
     setShowCreator('no')
-    props.addTag(refCreator.current.value);
+    props.addTag(refCreator.current.value.toLowerCase());
   }
 
   const handleChange = (event) => { 

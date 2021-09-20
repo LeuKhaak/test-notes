@@ -1,19 +1,16 @@
-// eslint-disable-next-line
-import React, {useState, useEffect} from 'react';
 import Note from './Note';
 import AllTags from './AllTags';
 
 function AllNotes(props) {
-  // console.log(props.data)
 
   return(
       <div className="notes">
         <ul className="notesList">
           { props.data.map((element, index) => (
-            <Note key={ element } data={element} index={ index } update={props.update} deleteNote={ props.deleteNote }/>           
+            <Note key={ element } data={element} tags={props.tags} index={ index } update={props.update} deleteNote={ props.deleteNote }/>           
           ))}
         </ul>
-        <AllTags tags={props.tags}/>
+        <AllTags tags={props.tags} deleteTag={props.deleteTag} filterNotes={props.filterNotes}/>
       </div>
   )
 }

@@ -1,21 +1,36 @@
-// eslint-disable-next-line
-import React, {useState, useEffect} from 'react';
-
+import React, {useState} from 'react';
 
 function Editor(props) {
     const refEditor = React.useRef()
     
     const [value, setValue] = useState(props.data)
 
-    // useEffect(() => {  
-    //     refNote.current.innerHTML = props.data[0]
-    //     refTags.current.innerHTML = props.data[2] 
-    // }, []) // eslint-disable-line
+    const checkForTags = () => {
+      if (value === '') return ''
+      const words = refEditor.current.value.split(' ')
+      //const tags = props.tags.toString()
+    
+      const checkedWords = []
+      words.forEach(element => {
+
+        let Tag = element;
+        
+        props.tags.forEach((tag) => {
+          if (tag.slice(1).toLowerCase() === element.toLowerCase() && element[0] !== '#') 
+            Tag = '#' + element   
+        })
+
+        checkedWords.push(Tag)
+        
+        
+      });
+      const checkedNote = checkedWords.join(' ')
+      return checkedNote;
+    }
 
     const changeNote = () => {
         props.setShowEditor('no')
-        props.update(props.index, refEditor.current.value)
-        //console.log(refEditor.current.value)
+        props.update(props.index, checkForTags())        
     }
 
     const handleChange = (event) => { 
@@ -29,8 +44,6 @@ function Editor(props) {
         <button onClick={changeNote}  className="createButton">Change note</button>
     </div>
   )
-} // { props.data[1].split(' ').filter(element => element.includes("#")).map((element, index) => (
-//   <span key={index}>{element}</span>            
-// ))} onClick={addNote}  
+} 
 
 export default Editor

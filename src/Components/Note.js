@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import React, {useState, useEffect} from 'react';
 import Editor from './Editor';
 
@@ -11,22 +10,8 @@ function Note(props) {
 
     useEffect(() => {  
         refNote.current.innerHTML = props.data[0]
-        refTags.current.innerHTML = props.data[2] 
-    }, []) // eslint-disable-line
-
-    // const deleteNote = (inx) => {
-    //   // const oldData = JSON.parse(localStorage.getItem('notes'));
-    //   // const newData = oldData.filter(element => JSON.stringify(element) !==  JSON.stringify(props.data));
-    //   // localStorage.setItem('notes', JSON.stringify(newData));
-    //   props.update()      
-    // }
-
-    // const selectTags = () => {
-    //   const words = props.data[1].split(' ')
-    //   const tags = words.filter(element => element.includes("#"));
-    //   console.log(tags)
-    //   return tags
-    // }    
+        refTags.current.innerHTML = props.data[2].join(' * ').toLowerCase()
+    }, []) // eslint-disable-line   
 
   return(      
     <li className="note">
@@ -38,11 +23,9 @@ function Note(props) {
           <p className="noteTags" ref={refTags}></p>
         </div>
 
-        <Editor index={props.index} data={props.data[1]} showEditor={showEditor} setShowEditor={setShowEditor} update={props.update}/>    
+        <Editor index={props.index} data={props.data[1]} tags={props.tags} showEditor={showEditor} setShowEditor={setShowEditor} update={props.update}/>    
     </li>
   )
-} // { props.data[1].split(' ').filter(element => element.includes("#")).map((element, index) => (
-//   <span key={index}>{element}</span>            
-// ))} onClick={addNote}  
+}  
 
 export default Note
