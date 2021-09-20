@@ -2,7 +2,7 @@ function AllTags(props) {
     
   return(
       <div className="allTags">
-        <ul className="notesList">
+        <ul className="tagList">
             { props.tags.map((element, index) => (
                 <li className="tagItem" key={ element }>
                   <button className="delete" onClick={() =>  props.deleteTag(index)}>&#10006;</button>

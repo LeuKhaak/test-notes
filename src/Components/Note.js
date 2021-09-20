@@ -15,8 +15,10 @@ function Note(props) {
 
   return(      
     <li className="note">
-        <button className="delete" onClick={() =>  props.deleteNote(props.index)}>&#10006;</button>
-        <button className="edit" onClick={() =>  setShowEditor('yes')}>&#9998;</button>
+        <div className="buttonWrapper">
+          <button className="delete" onClick={() =>  props.deleteNote(props.index)}>&#10006;</button>
+          <button className="edit" onClick={() =>  setShowEditor('yes')}>&#9998;</button>
+        </div>
 
         <div className="noteWrapper">
           <p className={showEditor === "no" ? "noteText" : "noteText editing"} ref={refNote}></p>

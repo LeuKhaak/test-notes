@@ -24,10 +24,10 @@ const [value, setValue] = useState('')
       <div className="creatorTags">
         <button onClick={startCreate} style={showCreator === 'no' ? {display: 'block'} : {display: 'none'}} className="createButton">Create tag</button>
 
-        <div style={showCreator === 'yes' ? {display: 'block'} : {display: 'none'}} >
+        <div className="creatorTagsWrapper" style={showCreator === 'yes' ? {display: 'flex'} : {display: 'none'}} >
           <input className="tagInput"  ref={refCreator} name="tagContent" placeholder="Create tag starting with #" value={value} onChange={(event) => handleChange(event)}></input>
 
-          <button onClick={addTag} className="createButton">Add tag</button>
+          <button onClick={addTag} className="createButton add">Add tag</button>
         </div>       
          
       </div>

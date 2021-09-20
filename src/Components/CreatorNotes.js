@@ -50,7 +50,7 @@ const handleChange = (event) => {
         <button onClick={startCreate} style={showCreator === 'no' ? {display: 'block'} : {display: 'none'}} className="createButton">Create note</button>
 
         <div className="creatorWrapper"  style={showCreator === 'yes' ? {display: 'flex'} : {display: 'none'}}>
-          <button onClick={addNote} className="createButton">Add note</button>
+          <button onClick={addNote} className="createButton add">Add note</button>
 
           <textarea className="noteForm" ref={refCreator} name="noteContent" placeholder="Write your note" value={value} onChange={(event) => handleChange(event)}></textarea>          
         </div>        

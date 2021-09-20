@@ -38,10 +38,10 @@ function Editor(props) {
     }
 
   return( 
-    <div style={props.showEditor === 'yes' ? {display: 'block'} : {display: 'none'}}>
+    <div className="editor" style={props.showEditor === 'yes' ? {display: 'flex'} : {display: 'none'}}>
         <textarea className="noteForm" ref={refEditor} name="noteContent" value={value} onChange={(event) => handleChange(event)}></textarea>
 
-        <button onClick={changeNote}  className="createButton">Change note</button>
+        <button onClick={changeNote}  className="createButton change">Change note</button>
     </div>
   )
 } 

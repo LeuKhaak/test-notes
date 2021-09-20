@@ -1,15 +1,26 @@
-$app-bgc: rgba(250, 244, 244, 0.3);
+$light-bgc: rgba(250, 244, 244, 0.3);
+$blue-bgc: rgba(203, 238, 252, 0.4);
 
-.App {
-  text-align: center;
-  background-color: $app-bgc;
+@mixin border-grey {
+	padding: 5px;
+	border: 1px solid rgb(209, 206, 206);
+	border-radius: 5px;
 }
+
+%small-button {
+	padding: 0 5px;	
+	height: 25px;
+	margin-right: 10px;
+	background-color: rgb(238, 128, 101);
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+} 
 
 .container {
     width: 80%;
 	max-width: 1280px;
 	margin: 0 auto;
-	padding: 5px 0;
 }
 
 .creators {
@@ -38,9 +49,10 @@ $app-bgc: rgba(250, 244, 244, 0.3);
 	align-items: center;
 }
 
-// .noteForm {
-// 	width: 80%;	
-// }
+.editor {
+	flex-direction: column;
+	align-items: center;
+}
 
 .noteForm, .tagInput {	
 	padding: 3px;
@@ -49,9 +61,14 @@ $app-bgc: rgba(250, 244, 244, 0.3);
 }
 
 .noteForm {
-	// width: 100%;
+	width: 250px;
 	height: 30px;
 	margin-left: 10px;
+}
+
+.change {
+	margin-top: 5px;
+	width: 120px;	
 }
 
 .notes {
@@ -71,11 +88,9 @@ $app-bgc: rgba(250, 244, 244, 0.3);
 .note {
 	display: flex;
 	align-items: center;
-	background-color: $app-bgc;
-	border: 1px solid rgb(209, 206, 206);
-	border-radius: 10px;
-	margin-bottom: 10px;
-	padding: 5px;
+	background-color: $light-bgc;
+	@include border-grey;	
+	margin-bottom: 10px;	
 }
 
 .noteWrapper {
@@ -88,13 +103,7 @@ $app-bgc: rgba(250, 244, 244, 0.3);
 }
 
 .delete, .edit {
-	padding: 0 5px;	
-	height: 25px;
-	margin-right: 10px;
-	background-color: rgb(238, 128, 101);
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
+	@extend %small-button
 }
 
 .edit {
@@ -102,11 +111,9 @@ $app-bgc: rgba(250, 244, 244, 0.3);
 }
 
 .noteText {
-	margin-top: 5px;
-	padding: 5px;
+	margin-top: 5px;	
 	background-color: #fff;
-	border: 1px solid rgb(209, 206, 206);
-	border-radius: 10px;
+	@include border-grey;
 }
 
 .editing > span {
@@ -115,8 +122,10 @@ $app-bgc: rgba(250, 244, 244, 0.3);
 	padding-bottom: 2px;
 	margin-left: 5px;
 	border-radius: 7px;	
-	background-color: rgba(203, 238, 252, 0.4);
+	background-color: $blue-bgc;
 }
+
+
 
 .noteTags {
 	font-weight: bold;
@@ -128,13 +137,79 @@ $app-bgc: rgba(250, 244, 244, 0.3);
 	width: calc(40% - 20px);
 	padding: 10px;
 	border-radius: 10px;	
-	background-color: rgba(203, 238, 252, 0.4);
+	background-color: $blue-bgc;
+}
+
+.tagList {
+	width: 60%;
 }
 
 .tagItem {
 	display: flex;
 	margin-bottom: 10px;
-	padding: 5px;
-	border: 1px solid rgb(209, 206, 206);
-	border-radius: 10px;
+	@include border-grey;
+}
+
+@media screen and (max-width: 1024px) {
+	.tagList {	
+		width: 95%;		
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.note {	
+		flex-direction: column-reverse;
+		align-items: start;		
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.creatorWrapper {
+		flex-direction: column-reverse;
+	}
+
+	.creatorTagsWrapper {
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.add {
+		width: 80px;
+		margin-top: 10px;
+	}
+	.allTags {
+		width: calc(40% - 10px);
+		padding: 10px 5px;		
+	}
+
+	.tagList {	
+		width: 100%;		
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.notes {
+		flex-direction: column-reverse;
+	}
+
+	.allTags, .notesList {
+		width: calc(100% - 10px);
+		margin: 10px 0;
+		padding: 10px 5px;		
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.creators {
+		flex-direction: column-reverse;
+	}
+
+	.creatorNotes {
+		margin-top: 10px;
+	}
+
+	.noteForm {
+		width: 220px;
+		margin: 0;
+	}
 }
