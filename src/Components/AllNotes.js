@@ -11,7 +11,7 @@ function AllNotes(props) {
           ))}
         </ul>
         
-        <AllTags tags={props.tags} deleteTag={props.deleteTag} filterNotes={props.filterNotes}/>
+        <AllTags tags={props.tags} deleteTag={props.deleteTag} filterNotes={props.filterNotes} filter={props.filter} setFilter={props.setFilter}/>
       </section>
   )
 }

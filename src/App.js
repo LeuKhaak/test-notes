@@ -2,11 +2,14 @@ import { useState, useEffect } from 'react';
 import './App.scss';
 import Creators from './Components/Creators';
 import AllNotes from './Components/AllNotes';
+//import FilteredNotes from './Components/FilteredNotes';
 import prepareData from './Utils/PrepareData';
 
 function App() {
   const [notes, setNotes] = useState([]);
-  const [tags, setTags] = useState([]);  
+  const [tags, setTags] = useState([]);
+  const [filteredNotes, setFilteredNotes] = useState([]);
+  const [filter, setFilter] = useState('no'); 
   
   useEffect(() => {
     setNotes(JSON.parse(localStorage.getItem('notes')) || []); // loading saved data
@@ -86,23 +89,21 @@ function App() {
       localStorage.setItem('tags', JSON.stringify(uniqueTags));        
   }
 
-  const filterNotes = (tag) => { // filtering notes by tag (moving to the top of the list)
+  const filterNotes = (tag) => { // filtering notes by tag
     const data = [...notes]
 
     const withTag = data.filter(element => element[2].includes(tag))
-    const withoutTag = data.filter(element => element[2].toString().indexOf(tag) === -1)
-    const filteredData = withTag.concat(withoutTag)    
     
-    setNotes([...filteredData]);
-    localStorage.setItem('notes', JSON.stringify(filteredData));
-  }
+    setFilter('yes')
+    setFilteredNotes([...withTag]);
+  }  
 
   return (    
     <div className="App">
       <div className="container">
         <Creators add={ addNote } addTag={ addTag } update={ updateNotesList } tags={tags}/>
        
-        <AllNotes data={ notes } tags={tags} update={ updateNotesList } deleteNote={ deleteNote } deleteTag={deleteTag} filterNotes={filterNotes}/>        
+        <AllNotes  data={filter === 'no' ? notes : filteredNotes} tags={tags} update={ updateNotesList } deleteNote={ deleteNote } deleteTag={deleteTag} filterNotes={filterNotes} filter={filter} setFilter={setFilter}/>       
       </div>
     </div>
   );
