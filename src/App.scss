@@ -58,12 +58,14 @@ $blue-bgc: rgba(203, 238, 252, 0.4);
 	padding: 3px;
 	border-radius: 10px;	
 	margin-right: 10px;
+	font-size: 18px;	
 }
 
 .noteForm {
 	width: 250px;
 	height: 30px;
 	margin-left: 10px;
+	min-height: 50px;
 }
 
 .change {
@@ -73,16 +75,27 @@ $blue-bgc: rgba(203, 238, 252, 0.4);
 
 .notes {
 	display: flex;
-	padding-top: 10px;
+	padding-top: 5px;
 }
 
 .notesList {	
-	width: 60%;
+	width: calc(60% - 20px);
 	margin-right: 20px;
+	position: relative;	
 }
 
-.noteWrapper {
-	margin-right: 10px;
+.noteBackground {
+	display: block;
+}
+
+.viewingNoteBackground {
+	display: block;
+	position: absolute;
+	width: 70vw;
+	padding: 30px 5px;	
+	background-color: rgba(124, 115, 115, 0.8);
+	z-index: 3;
+	border-radius: 15px;
 }
 
 .note {
@@ -90,12 +103,49 @@ $blue-bgc: rgba(203, 238, 252, 0.4);
 	align-items: center;
 	background-color: $light-bgc;
 	@include border-grey;	
-	margin-bottom: 10px;	
+	margin-bottom: 10px;
+	position: relative;	
 }
 
+.viewingNote {
+	background-color: #fff;
+	font-size: 22px;
+}
+
+.viewButton {
+	border: 0;
+	background-color: #fff;
+	position: absolute;
+	left: calc(100% - 25px);
+	top: 10px;
+}
+
+.view, .rollUp {
+	display: flex;	
+	width: 15px;
+	height: 15px;
+	border: 1px solid rgb(15, 15, 15);
+	cursor: zoom-in;
+}
+
+.rollUp {
+	align-items: flex-end;
+	cursor: zoom-out;
+}
+
+.rollUp > span {
+	display: block;
+	width: 15px;
+	height: 3px;
+	background-color: rgb(15, 15, 15);
+}
+
+
 .noteWrapper {
+	max-width: 85%;
 	display: flex;
 	flex-direction: column;
+	margin-right: 10px;
 }
 
 .noteWrapper > p {
@@ -125,8 +175,6 @@ $blue-bgc: rgba(203, 238, 252, 0.4);
 	background-color: $blue-bgc;
 }
 
-
-
 .noteTags {
 	font-weight: bold;
 	font-size: 14px;
@@ -134,24 +182,24 @@ $blue-bgc: rgba(203, 238, 252, 0.4);
 }
 
 .allTags {
-	width: calc(40% - 20px);
-	padding: 10px;
-	border-radius: 10px;	
-	background-color: $blue-bgc;
+	width: calc(40% - 20px);	
 }
 
 .tagList {
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
+	padding: 5px;
+	border-radius: 10px;	
+	background-color: $blue-bgc;
 }
 
 .tagItem {
 	display: flex;
 	width: auto;
 	align-items: center;
-	margin-bottom: 15px;
-	margin-right: 15px;
+	margin-bottom: 10px;
+	margin-right: 10px;
 	@include border-grey;
 	padding-left: 2px;
 }
@@ -176,16 +224,26 @@ $blue-bgc: rgba(203, 238, 252, 0.4);
 	display: block;
 }
 
-@media screen and (max-width: 1024px) {
-	.tagList {	
-		width: 95%;		
-	}
-}
-
 @media screen and (max-width: 800px) {
-	.note {	
+	.note, .notes {	
 		flex-direction: column-reverse;
 		align-items: start;		
+	}
+
+	.allTags, .notesList {
+		width: calc(100% - 10px);
+		margin: 0;
+		padding: 10px 5px;		
+	}
+	
+	.viewingNoteBackground {
+		width: 90vw;
+		left: -5vw;
+	}
+
+	.tagList {
+		justify-content: center;
+		margin: 0;
 	}
 }
 
@@ -202,15 +260,7 @@ $blue-bgc: rgba(203, 238, 252, 0.4);
 	.add {
 		width: 80px;
 		margin-top: 10px;
-	}
-	.allTags {
-		width: calc(40% - 10px);
-		padding: 10px 5px;		
-	}
-
-	.tagList {	
-		width: 100%;		
-	}
+	}	
 }
 
 @media screen and (max-width: 480px) {
